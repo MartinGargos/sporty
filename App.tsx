@@ -1,20 +1,20 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { RootNavigator } from './src/navigation/RootNavigator';
+import { EventsProvider } from './src/context/EventsContext';
+// ADD: UserProvider pro profil hráče
+import { UserProvider } from './src/context/UserContext';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar style="light" />
+      {/* UserProvider obaluje všechny obrazovky, aby měly přístup k profilu */}
+      <UserProvider>
+        <EventsProvider>
+          <RootNavigator />
+        </EventsProvider>
+      </UserProvider>
+    </>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+}   
